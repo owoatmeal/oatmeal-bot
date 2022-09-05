@@ -363,4 +363,4 @@ client.on('message', async msg => {
 
 })
 
-client.login("MTAxNjQ2ODk1ODI4NDYyMzkxMg.GGLaRi.NJu8OzH2WAr-2ko_0A8Ur2zd5ZP4t0bQ_w4kPM")
+client.login(config.token)
