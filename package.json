@@ -1,0 +1,14 @@
+{
+  "name": "oatmeal_learns",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc && node dist/src/index"
+  },
+  "dependencies": {
+    "discord.js": "12.5.1",
+    "lodash": "^4.17.21",
+    "quick.db": "^7.1.3"
+  }
+}
