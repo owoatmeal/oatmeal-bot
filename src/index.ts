@@ -1,7 +1,8 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { Client, MessageEmbed } from 'discord.js';
 import { capitalize } from 'lodash';
-import db from 'quick.db'
-import config from '../config.json'
+import * as db from 'quick.db';
+// import config from './config.json' assert {type: 'json'};
+const config = require('../config.json');
 
 const client = new Client();
 const prefix = config.prefix
@@ -35,6 +36,15 @@ function displayGold(x: number | string) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 type Snowflake = string;
 
 type playerType = {
@@ -50,9 +60,9 @@ type playerType = {
 }
 
 client.on('message', async msg => {
-    if (!msg.guild) return;
-    if (msg.author.bot) return;
-    if (!msg.content.toLocaleLowerCase().startsWith(prefix)) return;
+    if (!msg.guild) console.log("returning 1"); return;
+    if (msg.author.bot) console.log("returning 2"); return;
+    if (!msg.content.toLocaleLowerCase().startsWith(prefix)) console.log("returning 3"); return;
 
     let args = msg.content.slice(prefix.length).trim().split(/ +/g);
     let command = args.shift().toLowerCase();
@@ -127,7 +137,7 @@ client.on('message', async msg => {
 
         case 'buy':
 
-            let itemID = args[0].toLowerCase();
+            let itemID = args[0];//.toLowerCase();
             let itemPrice = itemID == 'oatmeal' ? 11 : 5;
             let price = kStringToInt(args[1] || 1) * itemPrice
 
@@ -261,16 +271,6 @@ client.on('message', async msg => {
                         break;
                     case 'set':
                         // we only have up to 3 nested objects
-
-                        function IsJsonString(str) {
-                            try {
-                                JSON.parse(str);
-                            } catch (e) {
-                                return false;
-                            }
-                            return true;
-                        }
-
                         let __setter__: any = args
                             .slice(player.id === msg.author.id ? 2 : 3)
                             .map(x => `${x}`)
@@ -363,4 +363,4 @@ client.on('message', async msg => {
 
 })
 
-client.login(config.token)
+client.login("MTAxNjQ2ODk1ODI4NDYyMzkxMg.GGLaRi.NJu8OzH2WAr-2ko_0A8Ur2zd5ZP4t0bQ_w4kPM")
